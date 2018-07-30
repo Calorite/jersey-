@@ -10,12 +10,14 @@ import com.yidi.entity.Parameter;
 
 
 public class AboutParameterImpl implements AboutParametersDAO {
-
+	private DBService helper;
+	public AboutParameterImpl(DBService dbhelper) {
+		this.helper=dbhelper;
+	}
 	@Override
 	public Map<Integer, Parameter> getparams() throws SQLException {
 		Map<Integer,Parameter> allparamenters=new HashMap<>();
 		ResultSet rs;
-		DBService helper=new DBService();
 		String sql="SELECT * FROM ai_qanda.parameter_tb;";
 		rs=helper.executeQueryRS(sql, null);
 		while(rs.next()) {

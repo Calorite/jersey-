@@ -12,9 +12,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import com.yidi.Interface.AboutParametersDAO;
 import com.yidi.Interface.AboutQuestionDAO;
 import com.yidi.Interface.AboutSolutionDAO;
-import com.yidi.Interface.ProcessFactory;
+import com.yidi.Interface.ParameterService;
 import com.yidi.Interface.TextInfoBytypeFactory;
 import com.yidi.entity.Parameter;
 import com.yidi.entity.ReturnInfo;
@@ -23,11 +24,15 @@ public class MainService implements TextInfoBytypeFactory {
 	private String senderid;
 	private String tousr;
 	private String text;
-	ProcessFactory process;
-	AboutSolutionDAO solutiondao;
-	AboutQuestionDAO questiondao;
+	private ParameterService process;
+	private AboutParametersDAO parametersdao;
+	private AboutSolutionDAO solutiondao;
+	private AboutQuestionDAO questiondao;
 	TextInfoBytypeFactory factory;
 	public MainService(String senderid,String tousr,String text) {
+		DefaultServiceFactory factory=new DefaultServiceFactory();
+		this.process=factory.getparameterService();
+		this.parametersdao=factory.getparameterDao(factory.getDBhelper());
 		this.senderid=senderid;
 		this.tousr=tousr;
 		this.text=text;
@@ -43,7 +48,7 @@ public class MainService implements TextInfoBytypeFactory {
 	public ReturnInfo dog() {
 		// TODO Auto-generated method stub
 		try {
-			Map<Integer, Parameter> initalparameters=process.getInitialParameters(text);
+			Map<Integer, Parameter> initalparameters=process.getInitialParameters(text,parametersdao);
 			Map<Set<Integer>, Integer> parameter_solutionlist=solutiondao.getsolutionlist();
 			factory.getReturnMSG(parameter_solutionlist, initalparameters);
 			Set<Parameter> initalparameterset=new HashSet<Parameter>();

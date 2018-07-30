@@ -1,4 +1,4 @@
-package com.yidi.service;
+package com.yidi.DapImpl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,13 +13,12 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import com.yidi.Interface.AboutParametersDAO;
-import com.yidi.Interface.ProcessFactory;
+import com.yidi.Interface.ParameterService;
 import com.yidi.entity.Parameter;
 import com.yidi.entity.ReturnInfo;
 
-public class ProcessFactoryImpl implements ProcessFactory {
+public class ProcessFactoryImpl implements ParameterService {
 	Map<Integer,Parameter> allparamenter=null;
-	AboutParametersDAO parametersdao;
 	@Override
 	public String returnpassedrecord(int rows) {
 		// TODO Auto-generated method stub
@@ -70,7 +69,7 @@ public class ProcessFactoryImpl implements ProcessFactory {
 	}
 
 	@Override
-	public Map<Integer,Parameter> getInitialParameters(String text) throws SQLException{
+	public Map<Integer,Parameter> getInitialParameters(String text,AboutParametersDAO parametersdao) throws SQLException{
 		allparamenter=parametersdao.getparams();
 		Map<Integer,Parameter> targetpara=new HashMap<Integer,Parameter>();
 		for(Parameter curtparamente:allparamenter.values()) {
@@ -133,6 +132,13 @@ public class ProcessFactoryImpl implements ProcessFactory {
 
 	@Override
 	public ReturnInfo getReturn(Map<Set<Integer>, Integer> parameter_solutionlist, Set<Parameter> initalparameters) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public ReturnInfo getreturninfo(String text) {
 		// TODO Auto-generated method stub
 		return null;
 	}

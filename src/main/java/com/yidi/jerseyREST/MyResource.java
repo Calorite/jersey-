@@ -30,7 +30,6 @@ public class MyResource {
     public void getIt(@Context HttpServletRequest request,@Context HttpServletResponse response) {
     	try {
             //请求转发
-    		//request.setAttribute("questionlist", DBupdate.getsolutionlist());
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println(e+"request dispatcher fail");

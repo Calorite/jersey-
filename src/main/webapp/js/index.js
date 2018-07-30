@@ -77,24 +77,27 @@ $('#gengxin').click(function(){
 
 function queding(event){
 	questionid=event.srcElement.parentNode.id;
-	$("#"+questionid).append('<div class="container">'
+	$("#"+questionid).append('<div class="container" id="selectoption">'
 	+'<h2>question1</h2>'
     +'<hr />'
-	+'<form method="post">'
             +'<select id="source" data-search="Search for options">'
-                +'<option value="option_1">Option 1</option>'
-                +'<option value="option_2">Why not option 2</option>'
-                +'<option value="option_3">Here\'s another option 3</option>'
-                +'<option value="option_4">What about option 4</option>'
-                +'<option value="option_5">I\'ll go with option 5</option>'
-                +'<option value="option_6">Let\'s stick to option 6</option>'
+                +'<option value="option_1">狗狗</option>'
+                +'<option value="option_2">乱叫</option>'
+                +'<option value="option_3">追</option>'
+                +'<option value="option_4">吃屎</option>'
+                +'<option value="option_5">不吃</option>'
+                +'<option value="option_6">发抖</option>'
             +'</select>'
             +'<select id="destination"  data-search="Search for options">'
             +'</select>'
-    +'</form>'
+            +'<button class="btn btn-default" onclick="newquestionparameter(event)">确定</button>'
     +'</div>');
 	$('#source, #destination').listswap({
 		truncate:true,
 		height:162,
 	});
+}
+
+function newquestionparameter(event){
+	$("#selectoption").remove();
 }
