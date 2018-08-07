@@ -12,13 +12,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import com.yidi.Interface.AboutParametersDAO;
-import com.yidi.Interface.AboutQuestionDAO;
-import com.yidi.Interface.AboutSolutionDAO;
-import com.yidi.Interface.ParameterService;
-import com.yidi.Interface.TextInfoBytypeFactory;
+
 import com.yidi.entity.Parameter;
 import com.yidi.entity.ReturnInfo;
+import com.yidi.interfactoty.AboutParametersDAO;
+import com.yidi.interfactoty.AboutQuestionDAO;
+import com.yidi.interfactoty.AboutSolutionDAO;
+import com.yidi.interfactoty.ParameterService;
+import com.yidi.interfactoty.TextInfoBytypeFactory;
 
 public class MainService implements TextInfoBytypeFactory {
 	private String senderid;
@@ -29,19 +30,22 @@ public class MainService implements TextInfoBytypeFactory {
 	private AboutSolutionDAO solutiondao;
 	private AboutQuestionDAO questiondao;
 	TextInfoBytypeFactory factory;
-	public MainService(String senderid,String tousr,String text) {
+	public MainService(String senderid,String tousr,String text) throws SQLException {
 		DefaultServiceFactory factory=new DefaultServiceFactory();
 		this.process=factory.getparameterService();
 		this.parametersdao=factory.getparameterDao(factory.getDBhelper());
 		this.senderid=senderid;
 		this.tousr=tousr;
 		this.text=text;
+
 		//查询历史纪录   宠物类型之类的处理
 		if(text.contains("猫")) {
 
 		}else {
 			dog();
 		}
+
+
 	}
 
 	@Override
@@ -84,18 +88,18 @@ public class MainService implements TextInfoBytypeFactory {
 		}
 		Map<Integer,Integer> idrankmap=new HashMap<>();
 		for (Set<Integer> key : parameter_solutionlist.keySet()) {
-				Set<Integer> retainset=new HashSet<Integer>();
-				retainset.addAll(key);
-				retainset.retainAll(parameteridset);
-				if(retainset.size()>0) {//有并集
-					Set<Integer> newretainset=new HashSet<Integer>();
-					newretainset.addAll(key);
-					newretainset.retainAll(retainset);//并集在key集合内的补集
-					for(int id:newretainset) {
-						idrankmap.put(id, parameters.get(id).getRank());
-					}
+			Set<Integer> retainset=new HashSet<Integer>();
+			retainset.addAll(key);
+			retainset.retainAll(parameteridset);
+			if(retainset.size()>0) {//有并集
+				Set<Integer> newretainset=new HashSet<Integer>();
+				newretainset.addAll(key);
+				newretainset.retainAll(retainset);//并集在key集合内的补集
+				for(int id:newretainset) {
+					idrankmap.put(id, parameters.get(id).getRank());
 				}
 			}
+		}
 		idrankmap=sortByValue(idrankmap);
 		if(idrankmap.size()>0) {
 			Entry<Integer, Integer> entry = idrankmap.entrySet().iterator().next();

@@ -1,13 +1,13 @@
 package com.yidi.service;
 
-import com.yidi.DapImpl.DBService;
-import com.yidi.DapImpl.DefaultDaoFactory;
-import com.yidi.Interface.AboutParametersDAO;
-import com.yidi.Interface.AboutQuestionDAO;
-import com.yidi.Interface.AboutSolutionDAO;
-import com.yidi.Interface.DaoFactory;
-import com.yidi.Interface.ParameterService;
-import com.yidi.Interface.ServiceFactory;
+import com.yidi.DaoImpl.DBService;
+import com.yidi.DaoImpl.DefaultDaoFactory;
+import com.yidi.interfactoty.AboutParametersDAO;
+import com.yidi.interfactoty.AboutQuestionDAO;
+import com.yidi.interfactoty.AboutSolutionDAO;
+import com.yidi.interfactoty.DaoFactory;
+import com.yidi.interfactoty.ParameterService;
+import com.yidi.interfactoty.ServiceFactory;
 
 public class DefaultServiceFactory implements ServiceFactory {
 	private DaoFactory daoFactory;
@@ -35,7 +35,7 @@ public class DefaultServiceFactory implements ServiceFactory {
 	@Override
 	public DBService getDBhelper() {
 		// TODO Auto-generated method stub
-		return new DBService();
+		return null;
 	}
 
 	@Override
@@ -49,5 +49,6 @@ public class DefaultServiceFactory implements ServiceFactory {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
