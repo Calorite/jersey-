@@ -1,5 +1,6 @@
 package com.yidi.service;
 
+import com.yidi.DaoImpl.AboutQuestionImpl;
 import com.yidi.DaoImpl.DBService;
 import com.yidi.DaoImpl.DefaultDaoFactory;
 import com.yidi.interfactoty.AboutParametersDAO;
@@ -41,7 +42,7 @@ public class DefaultServiceFactory implements ServiceFactory {
 	@Override
 	public AboutQuestionDAO getquestionDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return daoFactory.getquestiondao();
 	}
 
 	@Override

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; utf-8"
-	pageEncoding="utf-8" import="java.util.*"%>
+	pageEncoding="utf-8" import="com.yidi.entity.UpperQuestion"
+	import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>数据库工具</title>
 <link href="../css/myshow.css" rel="stylesheet" />
+<script src="../lib/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/listswap.css" />
 <link
 	href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
@@ -31,25 +33,19 @@
 		<div class="row-fluid leftitem">
 			<span class="help-inline">一级问题</span> <select class="selectpicker"
 				data-show-subtext="true" data-live-search="true">
-				<option data-subtext="Rep California">Tom Foolery</option>
-				<option data-subtext="Sen California">Bill Gordon</option>
-				<option data-subtext="Sen Massacusetts">Elizabeth Warren</option>
-				<option data-subtext="Rep Alabama">Mario Flores</option>
-				<option data-subtext="Rep Alaska">Don Young</option>
-				<option data-subtext="Rep California" >Marvin
-					Martinez</option>
+				<c:forEach items="${firstlist}" var="item" varStatus="status">
+					<option value="${item.getId()}">${item.getQuestion()}</option>
+				</c:forEach>
+				<!--<option data-subtext="Rep California">Tom Foolery</option>-->
 			</select>
 		</div>
 		<div class="row-fluid leftitem">
 			<span class="help-inline">二级问题</span> <select class="selectpicker"
 				data-show-subtext="true" data-live-search="true">
-				<option data-subtext="Rep California">Tom Foolery</option>
-				<option data-subtext="Sen California">Bill Gordon</option>
-				<option data-subtext="Sen Massacusetts">Elizabeth Warren</option>
-				<option data-subtext="Rep Alabama">Mario Flores</option>
-				<option data-subtext="Rep Alaska">Don Young</option>
-				<option data-subtext="Rep California">Marvin
-					Martinez</option>
+				<c:forEach items="${seconedlist}" var="item" varStatus="status">
+					<option value="${item.getId()}">${item.getQuestion()}</option>
+				</c:forEach>
+				<!--<option data-subtext="Rep California">Tom Foolery</option>-->
 			</select>
 		</div>
 		<div class=" form-group" id="parameterlist">
@@ -58,13 +54,13 @@
 			</table>
 		</div>
 	</div>
-	<script src="../js/jquery.listswap.js"></script>
 	<script src="../js/index.js" charset="utf-8"></script>
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script
 		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+	<script src="../js/jquery.listswap.js"></script>
 </body>
 </html>

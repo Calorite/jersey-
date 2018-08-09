@@ -1,10 +1,10 @@
-package com.yidi.DapImpl;
+package com.yidi.DaoImpl;
 
-import com.yidi.Interface.AboutParametersDAO;
-import com.yidi.Interface.AboutQuestionDAO;
-import com.yidi.Interface.AboutSolutionDAO;
-import com.yidi.Interface.DaoFactory;
-import com.yidi.Interface.ParameterService;
+import com.yidi.interfactoty.AboutParametersDAO;
+import com.yidi.interfactoty.AboutQuestionDAO;
+import com.yidi.interfactoty.AboutSolutionDAO;
+import com.yidi.interfactoty.DaoFactory;
+import com.yidi.interfactoty.ParameterService;
 
 public class DefaultDaoFactory implements DaoFactory {
 
@@ -17,13 +17,13 @@ public class DefaultDaoFactory implements DaoFactory {
 	@Override
 	public AboutParametersDAO getparametersdao(DBService helper) {
 		// TODO Auto-generated method stub
-		return new AboutParameterImpl(helper);
+		return new AboutParameterImpl();
 	}
 
 	@Override
 	public AboutQuestionDAO getquestiondao() {
 		// TODO Auto-generated method stub
-		return null;
+		return new AboutQuestionImpl();
 	}
 
 	@Override

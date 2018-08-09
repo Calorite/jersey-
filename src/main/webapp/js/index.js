@@ -156,8 +156,8 @@ function shownewquestion(event){
 				+'<label for="question">问题:</label>'
 				+'<textarea id="question'+trid+'" rows="3" cols="35"></textarea>'
 				+'</div>'
-				+'<div id="firstdiv" class="leftitem"><div><button class="btn btn-default" onclick="first(event)">一级问题</button></div></div>'
-				+'<div id="secdiv" class="leftitem"><div><button class="btn btn-default" onclick="seconed(event)">二级问题</button></div></div>'
+				//+'<div id="firstdiv" class="leftitem"><div><button class="btn btn-default" onclick="first(event)">一级问题</button></div></div>'
+				//+'<div id="secdiv" class="leftitem"><div><button class="btn btn-default" onclick="seconed(event)">二级问题</button></div></div>'
 				+'<div class="endleft"><button class="btn btn-default" onclick="newques(event)">确定</button></div>'
 				+'</div>');
 		newquestionmap[trid]=true;

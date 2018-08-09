@@ -1,6 +1,6 @@
 package com.yidi.Interface;
 
-import com.yidi.DapImpl.DBService;
+import com.yidi.DaoImpl.DBService;
 
 public interface DaoFactory {
 	ParameterService getprocess();

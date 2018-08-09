@@ -1,4 +1,4 @@
-package com.yidi.DapImpl;
+package com.yidi.DaoImpl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,10 +12,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import com.yidi.Interface.AboutParametersDAO;
-import com.yidi.Interface.ParameterService;
+
 import com.yidi.entity.Parameter;
 import com.yidi.entity.ReturnInfo;
+import com.yidi.interfactoty.AboutParametersDAO;
+import com.yidi.interfactoty.ParameterService;
 
 public class ProcessFactoryImpl implements ParameterService {
 	Map<Integer,Parameter> allparamenter=null;

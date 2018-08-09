@@ -1,5 +1,6 @@
 package com.yidi.interfactoty;
 
+import com.yidi.DaoImpl.AboutQuestionImpl;
 import com.yidi.DaoImpl.DBService;
 
 public interface DaoFactory {

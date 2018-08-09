@@ -1,4 +1,4 @@
-package com.yidi.DapImpl;
+package com.yidi.DaoImpl;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class DBService {
 
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URLSTR = "jdbc:mysql://127.0.0.1/ai_qanda";
+    private static final String URLSTR = "jdbc:mysql://localhost:3306/ai_qanda?useUnicode=true&characterEncoding=UTF-8&serverTimezone=JST";
     private static final String USERNAME = "root";
     private static final String USERPASSWORD ="474950494";
     private Connection connnection = null;
@@ -83,6 +83,30 @@ public class DBService {
         }
         return affectedLine;
     }
+
+    public int insertgetID(String sql,String text) {
+		int id=0;
+		try {
+			connnection = this.getConnection();
+            // 调用SQL
+            preparedStatement = connnection.prepareStatement(sql);
+
+            // 参数赋值
+            if(text!=null) {
+            	preparedStatement.setString(1, text);
+            }
+            if(preparedStatement.executeUpdate()>0){
+            	ResultSet rs=preparedStatement.executeQuery("select LAST_INSERT_ID();");
+            	if (rs.next()) {
+					return rs.getInt(1);
+				}
+            }
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return id;
+	}
+
 
     public int insertcontent1(String sql,byte[] text) {
         // 受影响的行数

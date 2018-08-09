@@ -1,5 +1,6 @@
-package com.yidi.DapImpl;
+package com.yidi.DaoImpl;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,8 +12,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import com.yidi.Interface.AboutQuestionDAO;
+import com.yidi.interfactoty.AboutQuestionDAO;
 import com.yidi.entity.Parameter;
+import com.yidi.entity.UpperQuestion;
 
 
 public class AboutQuestionImpl implements AboutQuestionDAO {
@@ -42,6 +44,33 @@ public class AboutQuestionImpl implements AboutQuestionDAO {
 		}
 		return 0;
 	}
+
+	public static boolean updateBundparameter(String parameter,String questionid) {
+		DBService helper=new DBService();
+		String sql="UPDATE ai_qanda.paramenterques_tb SET returnparameter=? WHERE id=?;";
+		String[] paramr={parameter,questionid};
+		int rows=helper.executeUpdate(sql, paramr);
+		if(rows>0){
+			return true;
+		}
+		return false;
+	}
+
+	public List<UpperQuestion> getUpperquestion() throws SQLException{
+		List<UpperQuestion> list1=new ArrayList<>();
+		DBService helper=new DBService();
+		String sql="SELECT * FROM ai_qanda.upperquestion_tb;";
+		ResultSet rs;
+		rs=helper.executeQueryRS(sql, null);
+		while(rs.next()) {
+			String id=rs.getString(1);
+			String question=rs.getString(2);
+			UpperQuestion quest=new UpperQuestion(id,question);
+			list1.add(quest);
+		}
+		return list1;
+	}
+
 
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
 

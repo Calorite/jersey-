@@ -26,10 +26,12 @@ import com.google.gson.reflect.TypeToken;
 import com.yidi.DaoImpl.AboutParameterImpl;
 import com.yidi.DaoImpl.AboutQuestionImpl;
 import com.yidi.DaoImpl.DBService;
-import com.yidi.Impl.DBupdate;
+import com.yidi.DaoImpl.DBupdate;
 import com.yidi.algorithm.Parama2Json;
 import com.yidi.entity.Parameter;
+import com.yidi.entity.UpperQuestion;
 import com.yidi.entity.parameInQuestion;
+import com.yidi.interfactoty.AboutQuestionDAO;
 import com.yidi.interfactoty.ParameterService;
 import com.yidi.service.DefaultServiceFactory;
 
@@ -39,7 +41,7 @@ import com.yidi.service.DefaultServiceFactory;
  */
 @Path("/myresource")
 public class MyResource {
-
+	DefaultServiceFactory factory=new DefaultServiceFactory();
 	/**
 	 * Method handling HTTP GET requests. The returned object will be sent
 	 * to the client as "text/plain" media type.
@@ -49,7 +51,25 @@ public class MyResource {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public void getIt(@Context HttpServletRequest request,@Context HttpServletResponse response) {
+		AboutQuestionDAO questiondao=factory.getquestionDao();
+		List<UpperQuestion> firstlist=new ArrayList<>();
+		List<UpperQuestion> seconedlist=new ArrayList<>();
 		try {
+			try {
+				List<UpperQuestion> alist=questiondao.getUpperquestion();
+				for(UpperQuestion upper:alist) {
+					if((upper.getId().contains("A"))) {//一级问题
+						firstlist.add(upper);
+					}else if((upper.getId().contains("B"))){//二级问题
+						seconedlist.add(upper);
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("firstlist", firstlist);
+			request.setAttribute("seconedlist", seconedlist);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -68,7 +88,7 @@ public class MyResource {
 		Set<Parameter> parametes;
 		if(text!=null){
 			try {
-				DefaultServiceFactory factory=new DefaultServiceFactory();
+
 				ParameterService process=factory.getparameterService();
 				DBService helper=new DBService();
 				Map<Integer,Parameter> parametermap=process.getInitialParameters(text,factory.getparameterDao(factory.getDBhelper()));
@@ -177,25 +197,25 @@ public class MyResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)  //接受的参数类型为表单信息
 	@Produces({MediaType.APPLICATION_JSON})
-	public String insertnewParameterANDQuestion(@FormParam("newparameter") String parameters,@FormParam("question") String solutionid) throws SQLException {
+	public String insertnewParameterANDQuestion(@FormParam("newparameter") String parameters,@FormParam("question") String solutionid,@FormParam("upperid") String upperid) throws SQLException {
 		try {
 			Gson gson=new Gson();
 			Map<String, String> returnmap=new HashMap<>();
 			AboutParameterImpl paImpl=new AboutParameterImpl();
-			Parameter parater=paImpl.insertParametergetID(parameters);
-			int questionid=paImpl.insertQuestionID(solutionid, String.valueOf(parater.getParameterid()),parameters);
-			paImpl.updateParameterquestionid(parater.getParameterid(), questionid);
-			parater.setQuestionid(questionid);
+//			Parameter parater=paImpl.insertParametergetID(parameters);
+//			int questionid=paImpl.insertQuestionID(solutionid, String.valueOf(parater.getParameterid()),parameters);
+//			paImpl.updateParameterquestionid(parater.getParameterid(), questionid);
+//			parater.setQuestionid(questionid);
 			List<Parameter> pmeters=new ArrayList<>();
 			Map<Integer, Parameter> allparameters=paImpl.getparams();
 			for(Parameter p: allparameters.values()){
 				pmeters.add(p);
 			}
 			String returnstr=Parama2Json.listToJSON(pmeters);
-			String returnparama=String.valueOf(parater.getParameterid())+';'+parater.getParameter();
+			String returnparama="2222;2010";
 			returnmap.put("parameterIN", returnparama);
 			returnmap.put("parameterlist", returnstr);
-			returnmap.put("questionid", String.valueOf(questionid));
+			returnmap.put("questionid", String.valueOf(9999));
 			return gson.toJson(returnmap);
 		} catch (Exception e) {
 			// TODO: handle exception

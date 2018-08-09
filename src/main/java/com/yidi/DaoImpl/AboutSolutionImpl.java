@@ -1,4 +1,4 @@
-package com.yidi.DapImpl;
+package com.yidi.DaoImpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.yidi.Interface.AboutSolutionDAO;
+import com.yidi.interfactoty.AboutSolutionDAO;
 
 public class AboutSolutionImpl implements AboutSolutionDAO {
 
